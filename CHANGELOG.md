@@ -6,6 +6,24 @@ All notable changes to brooks-lint are documented here.
 
 ---
 
+## [1.2.3] - 2026-05-13
+
+### Added
+
+- **`scripts/bump-version.mjs`** — new script that propagates the version from
+  `package.json` to all manifests (`.claude-plugin/plugin.json`,
+  `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`,
+  `gemini-extension.json`) and the README badge in one command. Added `npm run bump`
+  shortcut to `package.json`.
+
+### Changed
+
+- **`CLAUDE.md`** — Slash commands gotcha now enumerates all short forms inline
+  (`/brooks-review`, `/brooks-audit`, `/brooks-debt`, `/brooks-test`,
+  `/brooks-health`, `/brooks-sweep`) instead of showing only one example.
+
+---
+
 ## [1.2.2] - 2026-04-29
 
 Aggressive token reduction across all skill guides and shared framework files.

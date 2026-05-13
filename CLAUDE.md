@@ -20,7 +20,7 @@ Guidance for Claude Code when modifying this repository. For repo layout, instal
 - **SKILL.md trigger descriptions:** Every `description:` field MUST include a "Do NOT trigger for:" clause. Without it, false triggering occurs (e.g. `brooks-debt` firing on HTTP `/health` questions).
 - **Book count is derived, never hardcoded:** `validate-repo.mjs` reads `source-coverage.md` frontmatter and derives `sourceCount` from it. Adding a book = update the frontmatter list + add the corresponding section; the validator auto-adapts.
 - **`package.json` is ESM:** `"type": "module"` enables ESM for everything in `scripts/`. Skills are plain markdown — no bundling.
-- **Slash commands:** Plugin skills register as `/brooks-lint:brooks-review`. Short forms (`/brooks-review`) are auto-installed to `~/.claude/commands/` by the session-start hook — they are thin wrappers, not separate definitions.
+- **Slash commands:** Plugin skills register as `/brooks-lint:brooks-review`. Short forms (`/brooks-review`, `/brooks-audit`, `/brooks-debt`, `/brooks-test`, `/brooks-health`, `/brooks-sweep`) are auto-installed to `~/.claude/commands/` by the session-start hook — they are thin wrappers, not separate definitions.
 - **GitHub Action cache:** `.github/actions/brooks-lint/action.yml` uses `actions/cache@v4` with built-in cache-hit guard — do NOT add a manual directory check.
 - **Custom risks:** Teams add project-specific risk codes via `custom-risks-guide.md` in their project root. Template lives at `skills/_shared/custom-risks-guide.md`.
 
