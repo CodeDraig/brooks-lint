@@ -40,9 +40,10 @@ Follow the repo's "Adding a New Skill" checklist exactly:
    `expected_output`, `mode`, `files`.
 5. **Validate.** `npm run validate` (structure + step continuity + Process-section
    presence) and `npm run evals` (eval schema). Fix until both pass.
-6. **Local-test.** `cp -r skills/* ~/.claude/skills/brooks-lint/`, trigger the new
-   skill in a Claude session, verify the Iron Law output, then restore the
-   marketplace copy: `/plugin marketplace update` →
+6. **Local-test.** `cp -r skills/* ~/.claude/skills/brooks-lint/` (if you've
+   symlinked `~/.claude/skills/brooks-lint` to the repo, skip this — edits are
+   already live), trigger the new skill in a Claude session, verify the Iron Law
+   output, then restore the marketplace copy: `/plugin marketplace update` →
    `/plugin install brooks-lint@brooks-lint-marketplace`.
 
 Do NOT register a slash command by hand — short forms are auto-installed by the

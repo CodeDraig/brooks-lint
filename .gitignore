@@ -23,3 +23,6 @@ Thumbs.db
 
 # Local planning docs (not part of the plugin)
 docs/superpowers/
+
+# Maintainer-local Claude Code config (hooks, permissions)
+.claude/settings.local.json

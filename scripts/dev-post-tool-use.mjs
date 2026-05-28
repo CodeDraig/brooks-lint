@@ -55,8 +55,7 @@ try {
 }
 if (!rel) process.exit(0);
 
-const needsValidate =
-  rel.startsWith("skills/") || ROOT_MANIFESTS.has(rel) || rel.endsWith("source-coverage.md");
+const needsValidate = rel.startsWith("skills/") || ROOT_MANIFESTS.has(rel);
 
 if (needsValidate) {
   try {
