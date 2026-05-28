@@ -58,7 +58,7 @@ To add a scenario: append to the `evals` array with the next sequential `id` and
 ## Development Commands
 
 ```bash
-npm run bump <version>    # Propagate version across all manifests, README badge, and changelog
+npm run bump              # Propagate the package.json version to all manifests + README badge (NOT changelog)
 npm run validate          # Repo consistency: manifests, README badge, changelog, source inventory, skills structure
 npm test                  # Unit tests for validate-repo helpers
 npm run evals             # Eval structural validation (IDs, fields, risk-code refs)
@@ -72,4 +72,4 @@ CLAUDE_PLUGIN_ROOT=1 bash hooks/session-start   # plugin platform branch
 
 ## Release Process
 
-`npm run bump <version>` (propagates to all manifests, README badge, and changelog) → `npm run validate` → commit, push, tag GitHub release.
+Set the new version in `package.json` (e.g. `npm version <v> --no-git-tag-version`), then `npm run bump` (propagates the version to all manifests + README badge) → add the new `CHANGELOG.md` section by hand → `npm run validate` → commit, push, tag GitHub release.
