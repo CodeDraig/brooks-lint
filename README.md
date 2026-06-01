@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <strong>English</strong> · <a href="README.zh-CN.md">简体中文</a>
+</p>
+
+<p align="center">
   <a href="#the-six-decay-risks">The Six Decay Risks</a> •
   <a href="#what-it-looks-like">What It Looks Like</a> •
   <a href="#benchmark">Benchmark</a> •
