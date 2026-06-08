@@ -250,6 +250,84 @@ mkdir -p ~/.codex/skills/brooks-lint
 cp -r /tmp/brooks-lint/skills/* ~/.codex/skills/brooks-lint/
 ```
 
+### More platforms (OpenCode · Cursor · Antigravity · pi)
+
+brooks-lint ships as standard [Agent Skills](https://agentskills.io) (`SKILL.md` + Markdown
+guides). Any agent that natively loads Agent Skills can run all six modes with **no conversion** —
+just drop the `skills/` directory into the platform's skill folder. Findings auto-trigger from each
+skill's `description`; the repo's `AGENTS.md` carries the Iron Law and scoring rules.
+
+> **⚠️ Flat layout — do not nest.** Unlike the Claude Code / Gemini manual install (which nests
+> everything under a `brooks-lint/` folder), the platforms below discover skills with a **single-level**
+> glob (`skills/<name>/SKILL.md`). Copy `skills/*` so each `brooks-*` directory **and** `_shared/`
+> land **side by side** — the skills read shared files via the relative path `../_shared/`, which only
+> resolves when `_shared/` is a sibling of the skill folders.
+
+```bash
+git clone https://github.com/hyhmrright/brooks-lint.git /tmp/brooks-lint
+```
+
+#### OpenCode
+```bash
+mkdir -p ~/.config/opencode/skills
+cp -r /tmp/brooks-lint/skills/* ~/.config/opencode/skills/   # global
+# — or project-scoped —
+cp -r /tmp/brooks-lint/skills/* .opencode/skills/
+```
+OpenCode also discovers Claude-compatible `~/.claude/skills/*/SKILL.md` and reads `AGENTS.md`
+automatically. ([skills docs](https://opencode.ai/docs/skills/) · [rules docs](https://opencode.ai/docs/rules/))
+
+#### Cursor
+```bash
+mkdir -p ~/.cursor/skills
+cp -r /tmp/brooks-lint/skills/* ~/.cursor/skills/            # global
+# — or project-scoped —
+cp -r /tmp/brooks-lint/skills/* .cursor/skills/
+```
+Native `SKILL.md` support landed in Cursor 2.4; it also loads `.agents/skills/` and existing Claude/Codex
+skill folders, and reads `AGENTS.md`. ([skills docs](https://cursor.com/docs/skills))
+
+#### Antigravity (Google)
+```bash
+# project-scoped (recommended — official convention)
+mkdir -p .agent/skills
+cp -r /tmp/brooks-lint/skills/* .agent/skills/
+# — or global —
+mkdir -p ~/.gemini/skills
+cp -r /tmp/brooks-lint/skills/* ~/.gemini/skills/
+```
+Antigravity uses Claude-compatible Agent Skills and reads `AGENTS.md` / `GEMINI.md`.
+([skills docs](https://antigravity.google/docs/skills) · [rules & workflows](https://antigravity.google/docs/rules-workflows))
+
+#### pi ([earendil-works/pi](https://github.com/earendil-works/pi))
+```bash
+mkdir -p ~/.pi/agent/skills
+cp -r /tmp/brooks-lint/skills/* ~/.pi/agent/skills/
+```
+Or point pi at the cloned repo without copying — add to `~/.pi/settings.json` (or project `.pi/settings.json`):
+```json
+{ "skills": ["/tmp/brooks-lint/skills"] }
+```
+pi loads `SKILL.md` skills and reads `AGENTS.md` / `CLAUDE.md`. ([skills docs](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/skills.md))
+
+### Platform support status
+
+| Platform | Mechanism | Status |
+|----------|-----------|--------|
+| Claude Code | Plugin marketplace + Agent Skills | ✅ Verified |
+| Gemini CLI | Extension + Agent Skills | ✅ Verified |
+| Codex CLI | Skill installer + Agent Skills | ✅ Verified |
+| OpenCode | Native Agent Skills + `AGENTS.md` | 🧪 Documented per official spec — community verification welcome |
+| Cursor | Native Agent Skills (2.4+) + `AGENTS.md` | 🧪 Documented per official spec — community verification welcome |
+| Antigravity | Native Agent Skills + `AGENTS.md`/`GEMINI.md` | 🧪 Documented per official spec — community verification welcome |
+| pi | Native Agent Skills + `AGENTS.md` | 🧪 Documented per official spec — community verification welcome |
+
+> **🧪 Help us verify.** The four newer platforms are documented from each tool's official skill spec but
+> not yet end-to-end tested by the maintainer. If you run brooks-lint on one of them — working **or**
+> broken — please [open an issue](https://github.com/hyhmrright/brooks-lint/issues/new) with the platform,
+> version, and what you saw. Other Agent-Skills-compatible agent? It almost certainly works the same way —
+> tell us and we'll add it.
+
 ## Slash Commands
 
 ### Claude Code
@@ -286,6 +364,13 @@ cp -r /tmp/brooks-lint/skills/* ~/.codex/skills/brooks-lint/
 | `$brooks-sweep` | Full sweep — analyse all dimensions and auto-fix findings |
 
 The skills also trigger automatically when you discuss code quality, architecture, maintainability, or test health.
+
+### OpenCode · Cursor · Antigravity · pi
+
+These platforms invoke Agent Skills automatically from each skill's `description` — just ask
+("review this PR", "audit the architecture", "where's our worst tech debt?") and the matching mode
+runs. For explicit invocation, use the platform's skill-command syntax (e.g. pi registers each skill
+as `/skill:brooks-review`; Cursor and OpenCode expose `/brooks-review` once the skill is discovered).
 
 ## Usage
 

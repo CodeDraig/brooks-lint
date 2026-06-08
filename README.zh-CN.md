@@ -250,6 +250,79 @@ mkdir -p ~/.codex/skills/brooks-lint
 cp -r /tmp/brooks-lint/skills/* ~/.codex/skills/brooks-lint/
 ```
 
+### 更多平台（OpenCode · Cursor · Antigravity · pi）
+
+brooks-lint 以标准 [Agent Skills](https://agentskills.io)（`SKILL.md` + Markdown 指南）形式分发。
+任何原生加载 Agent Skills 的 agent 都能**无需任何转换**运行全部六种模式——只要把 `skills/` 目录拷进该平台的技能文件夹即可。
+诊断由每个技能的 `description` 自动触发；仓库的 `AGENTS.md` 承载铁律与评分规则。
+
+> **⚠️ 扁平布局——不要嵌套。** 与 Claude Code / Gemini 手动安装（把所有内容套进一层 `brooks-lint/` 文件夹）不同，
+> 下列平台用**单层** glob（`skills/<name>/SKILL.md`）发现技能。请拷贝 `skills/*`，让每个 `brooks-*` 目录**和** `_shared/`
+> **平级并列**——技能通过相对路径 `../_shared/` 读取共享文件，只有当 `_shared/` 与技能文件夹同级时才能正确解析。
+
+```bash
+git clone https://github.com/hyhmrright/brooks-lint.git /tmp/brooks-lint
+```
+
+#### OpenCode
+```bash
+mkdir -p ~/.config/opencode/skills
+cp -r /tmp/brooks-lint/skills/* ~/.config/opencode/skills/   # 全局
+# —— 或项目级 ——
+cp -r /tmp/brooks-lint/skills/* .opencode/skills/
+```
+OpenCode 还会发现 Claude 兼容的 `~/.claude/skills/*/SKILL.md`，并自动读取 `AGENTS.md`。
+（[技能文档](https://opencode.ai/docs/skills/) · [规则文档](https://opencode.ai/docs/rules/)）
+
+#### Cursor
+```bash
+mkdir -p ~/.cursor/skills
+cp -r /tmp/brooks-lint/skills/* ~/.cursor/skills/            # 全局
+# —— 或项目级 ——
+cp -r /tmp/brooks-lint/skills/* .cursor/skills/
+```
+Cursor 2.4 起原生支持 `SKILL.md`，同时加载 `.agents/skills/` 及已有的 Claude/Codex 技能目录，并读取 `AGENTS.md`。
+（[技能文档](https://cursor.com/docs/skills)）
+
+#### Antigravity（Google）
+```bash
+# 项目级（推荐——官方约定）
+mkdir -p .agent/skills
+cp -r /tmp/brooks-lint/skills/* .agent/skills/
+# —— 或全局 ——
+mkdir -p ~/.gemini/skills
+cp -r /tmp/brooks-lint/skills/* ~/.gemini/skills/
+```
+Antigravity 采用 Claude 兼容的 Agent Skills，读取 `AGENTS.md` / `GEMINI.md`。
+（[技能文档](https://antigravity.google/docs/skills) · [规则与工作流](https://antigravity.google/docs/rules-workflows)）
+
+#### pi（[earendil-works/pi](https://github.com/earendil-works/pi)）
+```bash
+mkdir -p ~/.pi/agent/skills
+cp -r /tmp/brooks-lint/skills/* ~/.pi/agent/skills/
+```
+或者不拷贝、直接让 pi 指向克隆下来的仓库——在 `~/.pi/settings.json`（或项目 `.pi/settings.json`）中加入：
+```json
+{ "skills": ["/tmp/brooks-lint/skills"] }
+```
+pi 加载 `SKILL.md` 技能并读取 `AGENTS.md` / `CLAUDE.md`。（[技能文档](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/skills.md)）
+
+### 平台支持状态
+
+| 平台 | 机制 | 状态 |
+|------|------|------|
+| Claude Code | 插件市场 + Agent Skills | ✅ 已验证 |
+| Gemini CLI | 扩展 + Agent Skills | ✅ 已验证 |
+| Codex CLI | 技能安装器 + Agent Skills | ✅ 已验证 |
+| OpenCode | 原生 Agent Skills + `AGENTS.md` | 🧪 依官方规范编写——欢迎社区验证 |
+| Cursor | 原生 Agent Skills（2.4+）+ `AGENTS.md` | 🧪 依官方规范编写——欢迎社区验证 |
+| Antigravity | 原生 Agent Skills + `AGENTS.md`/`GEMINI.md` | 🧪 依官方规范编写——欢迎社区验证 |
+| pi | 原生 Agent Skills + `AGENTS.md` | 🧪 依官方规范编写——欢迎社区验证 |
+
+> **🧪 帮我们验证。** 后四个较新的平台依据各工具官方技能规范编写，维护者尚未端到端实测。
+> 如果你在其中任一平台上跑过 brooks-lint——无论成功**还是**失败——请[提一个 issue](https://github.com/hyhmrright/brooks-lint/issues/new)，
+> 附上平台、版本和你看到的结果。用的是其它兼容 Agent Skills 的 agent？它几乎肯定以同样方式工作——告诉我们，我们会补上。
+
 ## 斜杠命令
 
 ### Claude Code
@@ -286,6 +359,12 @@ cp -r /tmp/brooks-lint/skills/* ~/.codex/skills/brooks-lint/
 | `$brooks-sweep` | 全面扫描——分析所有维度并自动修复 |
 
 当你讨论代码质量、架构、可维护性或测试健康时，这些技能也会自动触发。
+
+### OpenCode · Cursor · Antigravity · pi
+
+这些平台依据每个技能的 `description` 自动调用 Agent Skills——直接提问（"审查这个 PR"、"审查架构"、
+"我们最糟的技术债在哪"）就会运行对应模式。需要显式调用时，使用各平台的技能命令语法（例如 pi 把每个技能注册为
+`/skill:brooks-review`；Cursor 与 OpenCode 在技能被发现后暴露 `/brooks-review`）。
 
 ## 使用
 

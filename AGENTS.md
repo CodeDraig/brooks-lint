@@ -3,7 +3,7 @@
 This repository is an AI-powered code quality tool grounded in twelve classic engineering books (e.g., *The Mythical Man-Month*, *Code Complete*, *A Philosophy of Software Design*, *Software Engineering at Google*).
 
 ## Core Purpose
-**brooks-lint** is a Codex CLI plugin used to diagnose code quality across six "decay risk" dimensions: Cognitive Overload, Change Propagation, Knowledge Duplication, Accidental Complexity, Dependency Disorder, and Domain Model Distortion.
+**brooks-lint** is a portable Agent-Skills code quality tool — it runs on any Agent-Skills-compatible agent (Codex CLI, OpenCode, Cursor, Antigravity, pi, and others that read `AGENTS.md` and load `SKILL.md` skills) to diagnose code quality across six "decay risk" dimensions: Cognitive Overload, Change Propagation, Knowledge Duplication, Accidental Complexity, Dependency Disorder, and Domain Model Distortion.
 
 ## Skill Integration
 - **Auto-trigger:** You **must** proactively use the appropriate skill whenever discussing code quality, PR reviews, architecture health, test quality, or technical debt.

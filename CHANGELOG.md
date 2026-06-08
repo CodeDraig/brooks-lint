@@ -4,6 +4,16 @@ All notable changes to brooks-lint are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- **Multi-platform install docs** — documented running brooks-lint on four more
+  Agent-Skills-compatible agents (OpenCode, Cursor, Antigravity, pi) in both the
+  English and Simplified Chinese READMEs, with per-platform skill paths, a
+  flat-layout warning (`_shared/` must sit beside the skill folders for the
+  `../_shared/` relative reads to resolve), a platform support-status table, and
+  a call for community end-to-end verification via issues. Resolves the OpenCode
+  compatibility request (#14).
+
 ---
 
 ## [1.3.0] - 2026-05-24
