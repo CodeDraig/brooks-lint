@@ -554,7 +554,8 @@ Install the brooks-lint skill from hyhmrright/brooks-lint</div>
   try { saved = localStorage.getItem(STORE); } catch (e) {}
   if (!saved) {
     var nav = (navigator.language || "").toLowerCase();
-    saved = (nav.indexOf("zh-tw") === 0 || nav.indexOf("zh-hant") === 0) ? "zhtw"
+    saved = (nav.indexOf("zh-tw") === 0 || nav.indexOf("zh-hant") === 0
+             || nav.indexOf("zh-hk") === 0 || nav.indexOf("zh-mo") === 0) ? "zhtw"
           : nav.indexOf("zh") === 0 ? "zh"
           : nav.indexOf("ja") === 0 ? "ja"
           : nav.indexOf("ko") === 0 ? "ko"
