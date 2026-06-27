@@ -29,6 +29,10 @@
 </p>
 
 <p align="center">
+  <a href="https://trendshift.io/repositories/47738" target="_blank"><img src="https://trendshift.io/api/badge/repositories/47738" alt="hyhmrright%2Fbrooks-lint | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+</p>
+
+<p align="center">
   <a href="https://hyhmrright.github.io/brooks-lint/"><img src="assets/demo.gif" alt="brooks-lint 审查代码：一条 /brooks-review 命令产出 28/100 健康分以及引用书目的 症状 → 根源 → 后果 → 对策 诊断" width="820"></a>
 </p>
 
